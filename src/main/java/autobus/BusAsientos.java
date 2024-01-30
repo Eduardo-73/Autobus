@@ -16,8 +16,7 @@ public class BusAsientos {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         Asientos asiento = new Asientos();
-        Autobus bus = new Autobus(asiento);
-        MetodosAutobus.rellenarMatriz(asiento);
+        Autobus bus = new Autobus();
         String txt = """
                      *********************
                      1.- Mostrar asientos
@@ -41,7 +40,7 @@ public class BusAsientos {
             } while (repetir);
             switch (seleccionMenu) {
                 case 1 -> {
-                    MetodosAutobus.mostrarMatriz(bus);
+                    System.out.println(bus);
                 }
                 case 2 -> {
                     MetodosAutobus.seleccionarAsiento(bus);

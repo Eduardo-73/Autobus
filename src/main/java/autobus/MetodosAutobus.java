@@ -15,46 +15,6 @@ public class MetodosAutobus {
 
     public static Scanner teclado = new Scanner(System.in);
 
-    public static void rellenarMatriz(Asientos matrix) {
-        int contador = 0;
-        for (int i = 0; i < matrix.getMatriz().length; i++) {
-            for (int j = 0; j < matrix.getMatriz()[i].length; j++) {
-                contador++;
-                matrix.getMatriz()[i][j] = contador;
-                matrix.getEstadoAsiento()[i][j] = Estado.LIBRE;
-            }
-        }
-    }
-
-    public static void mostrarMatriz(Autobus matrix) {
-        for (int i = 0; i < matrix.getPosicion().getMatriz().length; i++) {
-            if (i >= 0 && i < 9) {
-                System.out.print("\nFila: 0" + (i + 1) + " -> ");
-            } else {
-                System.out.print("\nFila: " + (i + 1) + " -> ");
-            }
-            for (int j = 0; j < matrix.getPosicion().getMatriz()[i].length; j++) {
-                if (j == 2) {
-                    System.out.print(" ");
-                    System.out.print(" ");
-                    System.out.print(" ");
-                    System.out.print(" ");
-                }
-                if (matrix.getPosicion().getMatriz()[i][j] > 0
-                        && matrix.getPosicion().getMatriz()[i][j] < 10) {
-                    System.out.print("Asiento:[0" + matrix.getPosicion().getMatriz()[i][j]
-                            + "]");
-                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()[i][j] + "]");
-                } else {
-                    System.out.print("Asiento:[" + matrix.getPosicion().getMatriz()[i][j]
-                            + "]");
-                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()[i][j] + "]");
-                }
-            }
-        }
-        System.out.println();
-    }
-
     public static void seleccionarAsiento(Autobus matrix) {
         String minusvalida = "";
         boolean repetir = true;
@@ -99,25 +59,28 @@ public class MetodosAutobus {
                 minusvalida = teclado.nextLine();
                 switch (minusvalida) {
                     case "Si", "si" -> {
-                        matrix.getPosicion().getEstadoAsiento()[x - 2][y - 1] = Estado.OCUPADO;
-                        matrix.getPosicion().getEstadoAsiento()[x - 2][y - 2] = Estado.OCUPADO;
-                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 2] = Estado.OCUPADO;
-                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 1] = Estado.OCUPADO;
+                        matrix.getMatrix()[x - 2][y - 1].setEstadoAsiento(Estado.OCUPADO);
+                        matrix.getMatrix()[x - 2][y - 2].setEstadoAsiento(Estado.OCUPADO);
+                        matrix.getMatrix()[x - 1][y - 2].setEstadoAsiento(Estado.OCUPADO);
+                        matrix.getMatrix()[x - 1][y - 1].setEstadoAsiento(Estado.OCUPADO);
                     }
                     case "No", "no" -> {
-                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 1] = Estado.OCUPADO;
+                        matrix.getMatrix()[x - 1][y - 1].setEstadoAsiento(Estado.OCUPADO);
                     }
                 }
-                if (minusvalida.equalsIgnoreCase("si")
-                        || minusvalida.equalsIgnoreCase("no")) {
+                if (!(minusvalida.equalsIgnoreCase("si")
+                        || minusvalida.equalsIgnoreCase("no"))) {
                     System.out.println("Debes introducir si o no");
-                    continue;
+                    repetir = true;
+                } else {
+                    repetir = false;
                 }
-                repetir = false;
+
             } catch (InputMismatchException ime) {
                 System.out.println("Debes de introducir si o no");
                 teclado.nextLine();
             }
         } while (repetir);
     }
+
 }

@@ -10,29 +10,66 @@ package autobus;
  */
 public class Asientos {
 
-    private int[][] matriz;
-    private Estado[][] estadoAsientos;
-    private final int FILA = 12;
-    private final int ASIENTO = 4;
+    private int id;
+    private Estado estadoAsientos;
+    private static int contador;
 
     public Asientos() {
-        this.matriz = new int[FILA][ASIENTO];
-        this.estadoAsientos = new Estado[FILA][ASIENTO];
+        this.id = contador++;
+        this.estadoAsientos = Estado.LIBRE;
     }
 
-    public int[][] getMatriz() {
-        return matriz;
+    public static Estado cambiarEstadoLibre() {
+        return Estado.LIBRE;
     }
 
-    public void setMatriz(int[][] matriz) {
-        this.matriz = matriz;
+    public static Estado cambiarEstadoOcupado() {
+        return Estado.OCUPADO;
     }
 
-    public Estado[][] getEstadoAsiento() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Estado getEstadoAsiento() {
         return estadoAsientos;
     }
 
-    public void setEstadoAsiento(Estado[][] estadoAsiento) {
+    public void setEstadoAsiento(Estado estadoAsiento) {
         this.estadoAsientos = estadoAsiento;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(estadoAsientos);
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 11 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Asientos other = (Asientos) obj;
+        return this.id == other.id;
+    }
+
 }

@@ -13,12 +13,18 @@ import java.util.Scanner;
 public class Autobus {
 
     private int id;
-    private Asientos posicion;
+    private Asientos[][] matrix;
     private static int contador;
+    private final int FILA = 12;
+    private final int COLUMNA = 4;
 
-    public Autobus(Asientos posicion) {
-        this.id = contador++;
-        this.posicion = posicion;
+    public Autobus() {
+        this.matrix = new Asientos[FILA][COLUMNA];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = new Asientos();
+            }
+        }
     }
 
     public int getId() {
@@ -29,12 +35,41 @@ public class Autobus {
         this.id = id;
     }
 
-    public Asientos getPosicion() {
-        return posicion;
+    public Asientos[][] getMatrix() {
+        return matrix;
     }
 
-    public void setPosicion(Asientos posicion) {
-        this.posicion = posicion;
+    public void setMatrix(Asientos[][] matrix) {
+        this.matrix = matrix;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < matrix.length; i++) {
+            if (i >= 0 && i < 9) {
+                System.out.print("\nFila: 0" + (i + 1) + " -> ");
+            } else {
+                System.out.print("\nFila: " + (i + 1) + " -> ");
+            }
+            for (int j = 0; j < matrix[i].length; j++) {
+                if (j == 2) {
+                    System.out.print(" ");
+                    System.out.print(" ");
+                    System.out.print(" ");
+                    System.out.print(" ");
+                }
+                if (j > -1 && j < 10) {
+                    System.out.print("Asiento:[0" + (j + 1) + "]");
+                    System.out.print("[" + matrix[i][j] + "]");
+                } else {
+                    System.out.print("Asiento:[" + (j + 1) + "]");
+                    System.out.print("[" + matrix[i][j] + "]");
+                }
+            }
+        }
+        System.out.println();
+        return sb.toString();
     }
 
     @Override
