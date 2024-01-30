@@ -108,6 +108,11 @@ public class MetodosAutobus {
                         matrix.getPosicion().getEstadoAsiento()[x - 1][y - 1] = Estado.OCUPADO;
                     }
                 }
+                if (minusvalida.equalsIgnoreCase("si")
+                        || minusvalida.equalsIgnoreCase("no")) {
+                    System.out.println("Debes introducir si o no");
+                    continue;
+                }
                 repetir = false;
             } catch (InputMismatchException ime) {
                 System.out.println("Debes de introducir si o no");
