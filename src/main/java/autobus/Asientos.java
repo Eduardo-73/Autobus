@@ -11,13 +11,13 @@ package autobus;
 public class Asientos {
 
     private int[][] matriz;
-    private Estado estadoAsientos;
+    private Estado[][] estadoAsientos;
     private final int FILA = 12;
     private final int ASIENTO = 4;
 
     public Asientos() {
         this.matriz = new int[FILA][ASIENTO];
-        this.estadoAsientos = Estado.LIBRE;
+        this.estadoAsientos = new Estado[FILA][ASIENTO];
     }
 
     public int[][] getMatriz() {
@@ -28,11 +28,11 @@ public class Asientos {
         this.matriz = matriz;
     }
 
-    public Estado getEstadoAsiento() {
+    public Estado[][] getEstadoAsiento() {
         return estadoAsientos;
     }
 
-    public void setEstadoAsiento(Estado estadoAsiento) {
+    public void setEstadoAsiento(Estado[][] estadoAsiento) {
         this.estadoAsientos = estadoAsiento;
     }
 }

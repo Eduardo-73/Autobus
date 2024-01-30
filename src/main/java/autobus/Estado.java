@@ -10,21 +10,6 @@ package autobus;
  */
 public enum Estado {
 
-    OCUPADO(0),
-    LIBRE(1);
-
-    private int valor;
-
-    private Estado(int valor) {
-        this.valor = valor;
-    }
-
-    public int getValor() {
-        return valor;
-    }
-
-    public void setValor(int valor) {
-        this.valor = valor;
-    }
-
+    OCUPADO,
+    LIBRE;
 }

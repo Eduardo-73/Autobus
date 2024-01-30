@@ -21,6 +21,7 @@ public class MetodosAutobus {
             for (int j = 0; j < matrix.getMatriz()[i].length; j++) {
                 contador++;
                 matrix.getMatriz()[i][j] = contador;
+                matrix.getEstadoAsiento()[i][j] = Estado.LIBRE;
             }
         }
     }
@@ -43,11 +44,11 @@ public class MetodosAutobus {
                         && matrix.getPosicion().getMatriz()[i][j] < 10) {
                     System.out.print("Asiento:[0" + matrix.getPosicion().getMatriz()[i][j]
                             + "]");
-                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()+ "]");
+                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()[i][j] + "]");
                 } else {
                     System.out.print("Asiento:[" + matrix.getPosicion().getMatriz()[i][j]
                             + "]");
-                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()+ "]");
+                    System.out.print("[" + matrix.getPosicion().getEstadoAsiento()[i][j] + "]");
                 }
             }
         }
@@ -77,7 +78,8 @@ public class MetodosAutobus {
         do {
             try {
                 do {
-                    System.out.println("Introduce la columna en la que te quieres sentar: ");
+                    System.out.println("Introduce el nº de asiento en el "
+                            + "que te quieres sentar: ");
                     y = teclado.nextInt();
                     if (y < 1 || y > 4) {
                         System.out.println("Debes de introducir un número "
@@ -97,10 +99,13 @@ public class MetodosAutobus {
                 minusvalida = teclado.nextLine();
                 switch (minusvalida) {
                     case "Si", "si" -> {
-                        
+                        matrix.getPosicion().getEstadoAsiento()[x - 2][y - 1] = Estado.OCUPADO;
+                        matrix.getPosicion().getEstadoAsiento()[x - 2][y - 2] = Estado.OCUPADO;
+                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 2] = Estado.OCUPADO;
+                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 1] = Estado.OCUPADO;
                     }
                     case "No", "no" -> {
-                        
+                        matrix.getPosicion().getEstadoAsiento()[x - 1][y - 1] = Estado.OCUPADO;
                     }
                 }
                 repetir = false;
